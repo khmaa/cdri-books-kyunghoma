@@ -1,0 +1,4 @@
+echo "Running pre-commit checks..."
+echo "Running ESLint + Prettier via lint-staged..."
+npx lint-staged --verbose
+echo "Pre-commit checks passed."
