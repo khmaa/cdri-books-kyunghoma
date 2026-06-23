@@ -1,3 +1,10 @@
+import { Providers } from './providers';
+import { AppRouter } from './router';
+
 export default function App() {
-  return <div>hello</div>;
+  return (
+    <Providers>
+      <AppRouter />
+    </Providers>
+  );
 }
