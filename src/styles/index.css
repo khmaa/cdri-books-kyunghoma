@@ -1,0 +1,62 @@
+@import 'tailwindcss';
+
+@theme {
+  /* ===== Color Palette ===== */
+  --color-primary: #4880ee;
+  --color-red: #e84118;
+  --color-gray: #dadada;
+  --color-light-gray: #f2f4f6;
+  --color-white: #ffffff;
+  --color-black: #222222;
+
+  /* ===== Text Color ===== */
+  --color-text-primary: #353c49;
+  --color-text-secondary: #6d7582;
+  --color-text-subtitle: #8d94a0;
+  --color-icon-tertiary: #b1b8c0;
+
+  /* ===== Font Family ===== */
+  --font-sans: 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+
+  /* ===== Typography ===== */
+  --text-title1: 24px;
+  --text-title1--line-height: 24px;
+
+  --text-title2: 22px;
+  --text-title2--line-height: 24px;
+
+  --text-title3: 18px;
+  --text-title3--line-height: 18px;
+
+  --text-body1: 20px;
+  --text-body1--line-height: 20px;
+
+  --text-body2: 14px;
+  --text-body2--line-height: 14px;
+
+  --text-caption: 16px;
+  --text-caption--line-height: 16px;
+
+  --text-small: 10px;
+  --text-small--line-height: 10px;
+
+  --text-price: 18px;
+  --text-price--line-height: 26px;
+
+  /* ===== Border Radius ===== */
+  --radius-button: 8px;
+}
+
+@layer base {
+  html,
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-text-primary);
+    background-color: var(--color-white);
+    font-weight: 500;
+  }
+  body {
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+}

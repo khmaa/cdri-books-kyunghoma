@@ -1,0 +1,12 @@
+echo "Running pre-push checks..."
+
+echo "Checking formatting..."
+npm run format:check
+
+echo "Running lint..."
+npm run lint
+
+echo "Verifying build..."
+npm run build
+
+echo "Pre-push checks passed."
