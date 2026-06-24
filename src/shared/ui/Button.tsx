@@ -30,7 +30,7 @@ export function Button({
       type={type}
       disabled={disabled || loading}
       className={cn(
-        'inline-flex h-12 items-center justify-center gap-1 rounded-button px-5 text-body2 transition-colors disabled:cursor-not-allowed disabled:opacity-60',
+        'inline-flex h-12 items-center justify-center gap-1 whitespace-nowrap rounded-button px-5 text-body2 transition-colors disabled:cursor-not-allowed disabled:opacity-60',
         buttonVariants[variant],
         className,
       )}
