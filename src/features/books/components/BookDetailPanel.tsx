@@ -5,6 +5,7 @@ import { Button } from '@/shared/ui/Button';
 import { ChevronUpIcon } from '@/shared/ui/Icons';
 import { useEffect, useRef, useState } from 'react';
 import type { KakaoBook } from '../types/book';
+import { FavoriteHeartButton } from './FavoriteHeartButton';
 
 type BookDetailPanelProps = {
   book: KakaoBook;
@@ -28,12 +29,15 @@ export function BookDetailPanel({ book, onCollapse }: BookDetailPanelProps) {
 
   return (
     <div className="flex min-h-[344px] gap-8 px-4 py-6">
-      <img
-        src={book.thumbnail}
-        alt={book.title}
-        loading="lazy"
-        className="h-[280px] w-[210px] shrink-0 rounded-sm bg-light-gray object-cover"
-      />
+      <div className="relative h-[280px] w-[210px] shrink-0">
+        <img
+          src={book.thumbnail}
+          alt={book.title}
+          loading="lazy"
+          className="h-full w-full rounded-sm bg-light-gray object-cover"
+        />
+        <FavoriteHeartButton book={book} className="absolute right-3 top-3" />
+      </div>
 
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="flex items-baseline gap-4">

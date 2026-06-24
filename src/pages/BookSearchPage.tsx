@@ -1,9 +1,9 @@
 import { useBookSearch } from '@/features/books/api/useBookSearch';
 import { AdvancedSearchModal } from '@/features/books/components/AdvancedSearchModal';
 import { BookList } from '@/features/books/components/BookList';
+import { EmptyState } from '@/features/books/components/EmptyState';
 import { SearchBar } from '@/features/books/components/SearchBar';
 import type { SearchTarget } from '@/features/books/types/book';
-import { BookEmptyIcon } from '@/shared/ui/Icons';
 import { useMemo, useState } from 'react';
 
 export default function BookSearchPage() {
@@ -11,7 +11,8 @@ export default function BookSearchPage() {
   const [target, setTarget] = useState<SearchTarget | undefined>(undefined);
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
 
-  const { data, isFetching, isError } = useBookSearch(query, target);
+  const { data, isFetching, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useBookSearch(query, target);
 
   const books = useMemo(() => data?.pages.flatMap((page) => page.documents) ?? [], [data]);
   const totalCount = data?.pages[0]?.meta.total_count ?? 0;
@@ -53,12 +54,16 @@ export default function BookSearchPage() {
           검색 결과를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.
         </p>
       ) : books.length === 0 ? (
-        <div className="flex flex-col items-center gap-4 py-20">
-          <BookEmptyIcon />
-          <p className="text-body2 font-medium text-text-subtitle">검색된 결과가 없습니다.</p>
-        </div>
+        <EmptyState message="검색된 결과가 없습니다." />
       ) : (
-        <BookList books={books} />
+        <BookList
+          books={books}
+          hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          onLoadMore={() => {
+            fetchNextPage();
+          }}
+        />
       )}
 
       <AdvancedSearchModal
