@@ -2,6 +2,8 @@ import { Button } from '@/shared/ui/Button';
 import { SearchIcon } from '@/shared/ui/Icons';
 import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
+import { useRecentKeywordsStore } from '../store/recentKeywordsStore';
+import { RecentKeywords } from './RecentKeywords';
 
 type SearchBarProps = {
   onSubmit: (query: string) => void;
@@ -11,28 +13,44 @@ type SearchBarProps = {
 
 export function SearchBar({ onSubmit, isFetching, onOpenAdvanced }: SearchBarProps) {
   const [keyword, setKeyword] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
+  const pushRecentKeyword = useRecentKeywordsStore((state) => state.push);
 
   const submitSearch = () => {
     if (isFetching) return; // 검색 진행 중에는 중복 호출 잠금
     const trimmedKeyword = keyword.trim();
     if (!trimmedKeyword) return;
+    pushRecentKeyword(trimmedKeyword);
     onSubmit(trimmedKeyword);
+    setIsFocused(false);
+  };
+
+  // 최근 검색어 클릭 — input 에 채우기만 하고 검색은 사용자가 직접 트리거
+  const handleSelectRecent = (selectedKeyword: string) => {
+    setKeyword(selectedKeyword);
+    setIsFocused(false);
   };
 
   return (
     <div className="flex items-center gap-4">
-      <div className="flex h-[50px] w-full max-w-[480px] items-center gap-2 rounded-full bg-light-gray px-6">
-        <button type="button" onClick={submitSearch} aria-label="검색">
-          <SearchIcon className="text-text-primary" />
-        </button>
-        <input
-          type="text"
-          value={keyword}
-          onChange={(event) => setKeyword(event.target.value)}
-          onKeyDown={(event) => event.key === 'Enter' && submitSearch()}
-          placeholder="검색어를 입력하세요"
-          className="w-full bg-transparent text-body1 text-text-primary placeholder:text-text-subtitle focus:outline-none"
-        />
+      <div className="relative w-full max-w-[480px]">
+        <div className="flex h-[50px] items-center gap-2 rounded-full bg-light-gray px-6">
+          <button type="button" onClick={submitSearch} aria-label="검색">
+            <SearchIcon className="text-text-primary" />
+          </button>
+          <input
+            type="text"
+            value={keyword}
+            onChange={(event) => setKeyword(event.target.value)}
+            onKeyDown={(event) => event.key === 'Enter' && submitSearch()}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            placeholder="검색어를 입력하세요"
+            className="w-full bg-transparent text-body1 text-text-primary placeholder:text-text-subtitle focus:outline-none"
+          />
+        </div>
+
+        {isFocused ? <RecentKeywords onSelect={handleSelectRecent} /> : null}
       </div>
 
       {isFetching ? (
