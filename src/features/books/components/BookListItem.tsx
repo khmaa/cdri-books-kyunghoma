@@ -3,6 +3,7 @@ import { joinAuthors } from '@/shared/lib/joinAuthors';
 import { Button } from '@/shared/ui/Button';
 import { ChevronDownIcon } from '@/shared/ui/Icons';
 import type { KakaoBook } from '../types/book';
+import { BookCover } from './BookCover';
 import { BookDetailPanel } from './BookDetailPanel';
 
 type BookListItemProps = {
@@ -23,11 +24,10 @@ export function BookListItem({ book, isExpanded, onToggle }: BookListItemProps) 
         <BookDetailPanel book={book} onCollapse={onToggle} />
       ) : (
         <div className="flex items-center gap-6 px-4 py-4">
-          <img
+          <BookCover
             src={book.thumbnail}
             alt={book.title}
-            loading="lazy"
-            className="h-[68px] w-12 shrink-0 rounded-sm bg-light-gray object-cover"
+            className="h-[68px] w-12 shrink-0 rounded-sm"
           />
 
           <div className="flex min-w-0 flex-1 items-center gap-4">
