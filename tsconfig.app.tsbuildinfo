@@ -1,1 +1,0 @@
-{"root":["./src/main.tsx","./src/vite-env.d.ts","./src/app/app.tsx","./src/app/providers.tsx","./src/app/router.tsx","./src/pages/booksearchpage.tsx","./src/pages/favoritespage.tsx","./src/shared/ui/header.tsx","./src/shared/ui/icons.tsx"],"version":"6.0.3"}
