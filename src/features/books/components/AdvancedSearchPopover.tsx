@@ -1,5 +1,6 @@
 import { Button } from '@/shared/ui/Button';
-import { Modal } from '@/shared/ui/Modal';
+import { ModalCloseIcon } from '@/shared/ui/Icons';
+import { Popover } from '@/shared/ui/Popover';
 import { Select, type SelectOption } from '@/shared/ui/Select';
 import { TextInput } from '@/shared/ui/TextInput';
 import { useState } from 'react';
@@ -14,13 +15,19 @@ const TARGET_OPTIONS: SelectOption<AdvancedSearchTarget>[] = [
   { value: 'publisher', label: '출판사' },
 ];
 
-type AdvancedSearchModalProps = {
+type AdvancedSearchPopoverProps = {
   open: boolean;
   onClose: () => void;
   onSearch: (params: { query: string; target: SearchTarget }) => void;
+  className?: string; // 위치/폭/배경/패딩은 부모(SearchBar)가 제어
 };
 
-export function AdvancedSearchModal({ open, onClose, onSearch }: AdvancedSearchModalProps) {
+export function AdvancedSearchPopover({
+  open,
+  onClose,
+  onSearch,
+  className,
+}: AdvancedSearchPopoverProps) {
   const [target, setTarget] = useState<AdvancedSearchTarget>('title');
   const [keyword, setKeyword] = useState('');
 
@@ -32,7 +39,16 @@ export function AdvancedSearchModal({ open, onClose, onSearch }: AdvancedSearchM
   };
 
   return (
-    <Modal open={open} onClose={onClose}>
+    <Popover open={open} onClose={onClose} className={className}>
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="닫기"
+        className="absolute right-4 top-4 text-icon-tertiary"
+      >
+        <ModalCloseIcon />
+      </button>
+
       <div className="flex min-h-32 flex-col gap-6 pt-6">
         <div className="flex items-center gap-3">
           <div className="w-20 shrink-0">
@@ -56,6 +72,6 @@ export function AdvancedSearchModal({ open, onClose, onSearch }: AdvancedSearchM
           검색하기
         </Button>
       </div>
-    </Modal>
+    </Popover>
   );
 }

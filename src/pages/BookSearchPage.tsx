@@ -1,5 +1,4 @@
 import { useBookSearch } from '@/features/books/api/useBookSearch';
-import { AdvancedSearchModal } from '@/features/books/components/AdvancedSearchModal';
 import { BookList } from '@/features/books/components/BookList';
 import { EmptyState } from '@/features/books/components/EmptyState';
 import { SearchBar } from '@/features/books/components/SearchBar';
@@ -9,7 +8,6 @@ import { useMemo, useState } from 'react';
 export default function BookSearchPage() {
   const [query, setQuery] = useState('');
   const [target, setTarget] = useState<SearchTarget | undefined>(undefined);
-  const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
 
   const { data, isFetching, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useBookSearch(query, target);
@@ -42,7 +40,7 @@ export default function BookSearchPage() {
       <SearchBar
         onSubmit={handleBasicSearch}
         isFetching={isFetching}
-        onOpenAdvanced={() => setIsAdvancedOpen(true)}
+        onAdvancedSearch={handleAdvancedSearch}
       />
 
       <p className="text-caption font-medium text-text-primary">
@@ -65,12 +63,6 @@ export default function BookSearchPage() {
           }}
         />
       )}
-
-      <AdvancedSearchModal
-        open={isAdvancedOpen}
-        onClose={() => setIsAdvancedOpen(false)}
-        onSearch={handleAdvancedSearch}
-      />
     </section>
   );
 }
