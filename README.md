@@ -36,6 +36,11 @@ npm run dev
 # 4. 프로덕션 빌드 / 미리보기
 npm run build
 npm run preview
+
+# 5. 테스트 / 커버리지
+npm test              # 전체 테스트 1회 실행
+npm run test:watch    # watch 모드
+npm run test:coverage # 커버리지 리포트 (터미널 + coverage/ HTML)
 ```
 
 > 카카오 REST API 키는 [Kakao Developers](https://developers.kakao.com) → 내 애플리케이션 → 앱 키 → **REST API 키**에서 발급합니다.
@@ -123,7 +128,7 @@ src/
 
 - 정렬 옵션(정확도순 / 발간일순) UI 노출 — 카카오 API `sort` 파라미터로 즉시 확장 가능
 - 모바일 본격 반응형 (헤더 햄버거화, 카드 세로 스택) — 현재는 데스크탑 기준
-- 테스트 코드 — `useFavoritesStore` toggle/persist, `formatPrice`·`joinAuthors` 유틸 우선
+- 정렬/필터 등 기능 확장 시 E2E 테스트(Playwright) 도입
 - 페이지 진입 / popup 트랜지션 애니메이션
 
-> 테스트는 3일 제약상 핵심 기능 구현에 집중하여 미작성했습니다. `useFavoritesStore`와 유틸 함수 단위 테스트를 우선순위로 추가할 예정입니다.
+> **테스트**: Vitest + React Testing Library로 단위·통합 테스트 73개를 작성했습니다 (커버리지 statements 88% / lines 90%). 공용 UI(`Button`/`Popover`/`Select`/`TextInput`), 도메인 컴포넌트(`SearchBar`/`BookList`/`BookDetailPanel`/`FavoriteHeartButton` 등), store(`favoritesStore`/`recentKeywordsStore`), 훅(`useBookSearch`), 검색 페이지 흐름을 커버합니다. `npm run test:coverage`로 리포트를 확인할 수 있습니다.
