@@ -10,7 +10,7 @@ describe('Header', () => {
         <Header />
       </MemoryRouter>,
     );
-    expect(screen.getByText('CERTICOS BOOKS')).toBeInTheDocument();
+    expect(screen.getByText('Kakao Book Store')).toBeInTheDocument();
     expect(screen.getByText('도서 검색')).toBeInTheDocument();
     expect(screen.getByText('내가 찜한 책')).toBeInTheDocument();
   });

@@ -52,6 +52,6 @@ describe('useFavoritesStore', () => {
   it('찜 목록을 localStorage 에 영속한다', () => {
     useFavoritesStore.getState().toggle(makeBook('111'));
 
-    expect(localStorage.getItem('cdri-books:favorites')).toContain('111');
+    expect(localStorage.getItem('kakao-books:favorites')).toContain('111');
   });
 });

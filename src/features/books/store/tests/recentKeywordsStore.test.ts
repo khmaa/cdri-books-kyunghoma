@@ -44,6 +44,6 @@ describe('useRecentKeywordsStore', () => {
 
   it('localStorage 에 영속한다', () => {
     useRecentKeywordsStore.getState().push('노르웨이');
-    expect(localStorage.getItem('cdri-books:recent-keywords')).toContain('노르웨이');
+    expect(localStorage.getItem('kakao-books:recent-keywords')).toContain('노르웨이');
   });
 });
