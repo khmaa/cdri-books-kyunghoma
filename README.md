@@ -1,4 +1,4 @@
-# CERTICOS BOOKS
+# Kakao Book Store
 
 카카오 도서 검색 API를 활용한 **도서 검색 + 찜하기 SPA**입니다.
 React 19 · TypeScript · React Query 기반으로, 무한 스크롤 검색 · 상세보기 아코디언 · 상세 검색 popup · 최근 검색어 · 찜하기를 제공합니다.
